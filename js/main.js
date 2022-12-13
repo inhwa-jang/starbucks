@@ -20,7 +20,6 @@ const badgeEl = document.querySelector("header .badges");
 window.addEventListener(
   "scroll",
   _.throttle(function () {
-    console.log(window.scrollY);
     if (window.scrollY > 500) {
       // 배지 숨기기
       // gsap.to(요소, 지속시간, 옵션);
@@ -53,4 +52,44 @@ new Swiper(".notice-line .swiper-container", {
   direction: "vertical",
   autoplay: true,
   loop: true,
+});
+
+new Swiper(".promotion .swiper-container", {
+  slidesPerView: 3, // 한번에 보여줄 슬라이드 개수
+  spaceBetween: 10, // 슬라이드 사이 여백
+  centeredSlides: true, // 1번 슬라이드가 가운데 보이기
+  autoplay: {
+    delay: 5000,
+  },
+  loop: true,
+  pagination: {
+    el: ".promotion .swiper-pagination", // 페이지 번호 요소 선택자
+    clickable: true, // 사용자의 페이지 번호 요소 제어
+  },
+  navigation: {
+    prevEl: ".promotion .swiper-prev",
+    nextEl: ".promotion .swiper-next",
+  },
+});
+
+/**
+ * Promotion 슬라이드 토글 기능
+ */
+// 슬라이드 영역 요소 검색!
+const promotionEl = document.querySelector(".promotion");
+// 슬라이드 영역를 토글하는 버튼 검색!
+const promotionToggleBtn = document.querySelector(".toggle-promotion");
+// 슬라이드 영역 숨김 여부 기본값!
+let isHidePromotion = false;
+// 토글 버튼을 클릭하면,
+promotionToggleBtn.addEventListener("click", function () {
+  // 슬라이드 영역 숨김 여부를 반댓값으로 할당!
+  isHidePromotion = !isHidePromotion;
+  // 요소를 숨겨야 하면,
+  if (isHidePromotion) {
+    promotionEl.classList.add("hide");
+    // 요소가 보여야 하면,
+  } else {
+    promotionEl.classList.remove("hide");
+  }
 });
