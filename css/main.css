@@ -438,6 +438,7 @@ header .badges .badge {
   height: 693px;
   background-color: #f6f5ef;
   position: relative;
+  overflow: hidden;
   transition: height .4s;
 }
 
