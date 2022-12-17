@@ -39,6 +39,7 @@ window.addEventListener(
 // .throttle(함수, 시간)
 
 const fadeEls = document.querySelectorAll(".visual .fade-in");
+// 요소 반복처리
 fadeEls.forEach(function (fadeEl, index) {
   // gsap.to(요소, 지속시간, 옵션);
   gsap.to(fadeEl, 1, {
@@ -119,3 +120,14 @@ function floatingObject(selector, delay, size) {
 floatingObject(".floating1", 1, 15);
 floatingObject(".floating2", 0.5, 15);
 floatingObject(".floating3", 1.5, 20);
+
+const spyEls = document.querySelectorAll("section.scroll-spy");
+// 요소 반복처리
+spyEls.forEach(function (spyEl) {
+  new ScrollMagic.Scene({
+    triggerElement: spyEl, // 보여짐 여부를 감시할 요소를 지정
+    triggerHook: 0.8, // 화면의 80% 지점에서 보여짐 여부 감시
+  })
+    .setClassToggle(spyEl, "show") // 요소가 화면에 보이면 show 클래스 추가
+    .addTo(new ScrollMagic.Controller());
+});
