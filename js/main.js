@@ -1,3 +1,6 @@
+/**
+ * Search
+ */
 const searchEl = document.querySelector(".search");
 const searchInputEl = searchEl.querySelector("input");
 
@@ -15,7 +18,12 @@ searchInputEl.addEventListener("blur", function () {
   searchInputEl.setAttribute("placeholder", "");
 });
 
+/**
+ * Badge Showing & Hiding
+ * To Top Button
+ */
 const badgeEl = document.querySelector("header .badges");
+const toTopEl = document.querySelector("#to-top");
 
 window.addEventListener(
   "scroll",
@@ -27,17 +35,35 @@ window.addEventListener(
         opacity: 0,
         display: "none",
       });
+      // to-top 버튼 보이기
+      gsap.to(toTopEl, 0.2, {
+        x: 0,
+      });
     } else {
       // 배지 보이기
       gsap.to(badgeEl, 0.6, {
         opacity: 1,
         display: "block",
       });
+      // to-top 버튼 숨기기
+      gsap.to(toTopEl, 0.2, {
+        x: 100,
+      });
     }
   }, 300)
 );
 // .throttle(함수, 시간)
 
+toTopEl.addEventListener("click", function () {
+  gsap.to(window, 0.7, {
+    scrollTo: 0,
+  });
+  // window.scroll(0, 0);
+});
+
+/**
+ * Fade In Animation
+ */
 const fadeEls = document.querySelectorAll(".visual .fade-in");
 // 요소 반복처리
 fadeEls.forEach(function (fadeEl, index) {
@@ -48,6 +74,9 @@ fadeEls.forEach(function (fadeEl, index) {
   });
 });
 
+/**
+ * Swiper
+ */
 // new Swiper(선택자, 옵션)
 new Swiper(".notice-line .swiper-container", {
   direction: "vertical",
@@ -88,7 +117,7 @@ new Swiper(".awards .swiper-container", {
 });
 
 /**
- * Promotion 슬라이드 토글 기능
+ * Promotion Silde Toggle
  */
 // 슬라이드 영역 요소 검색!
 const promotionEl = document.querySelector(".promotion");
@@ -109,6 +138,9 @@ promotionToggleBtn.addEventListener("click", function () {
   }
 });
 
+/**
+ *  Floating Animation
+ */
 // 범위 랜덤 함수(소수점 2자리까지)
 function random(min, max) {
   // `.toFixed()`를 통해 반환된 문자 데이터를,
@@ -130,11 +162,13 @@ function floatingObject(selector, delay, size) {
     }
   );
 }
-
 floatingObject(".floating1", 1, 15);
 floatingObject(".floating2", 0.5, 15);
 floatingObject(".floating3", 1.5, 20);
 
+/**
+ * Fixed Images Animation Effects
+ */
 const spyEls = document.querySelectorAll("section.scroll-spy");
 // 요소 반복처리
 spyEls.forEach(function (spyEl) {
@@ -145,3 +179,9 @@ spyEls.forEach(function (spyEl) {
     .setClassToggle(spyEl, "show") // 요소가 화면에 보이면 show 클래스 추가
     .addTo(new ScrollMagic.Controller());
 });
+
+/**
+ * Copyright Current Year
+ */
+const thisYear = document.querySelector(".this-year");
+thisYear.textContent = new Date().getFullYear();
